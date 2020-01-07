@@ -40,7 +40,7 @@ class GoodsBrandAdmin(object):
 
 
 class BannerGoodsAdmin(object):
-    list_display = ["goods", "image", "index"]
+    list_display = ["goods", "image_img", "url", "index"]
 
 
 class HotSearchAdmin(object):

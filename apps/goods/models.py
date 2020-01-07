@@ -3,6 +3,9 @@ from datetime import datetime
 from django.db import models
 from DjangoUeditor.models import UEditorField
 
+from stdimage.models import StdImageField
+# from stdimage.utils import UploadToUUID
+
 
 # Create your models here.
 
@@ -118,9 +121,32 @@ class Banner(models.Model):
     轮播的商品
     """
     goods = models.ForeignKey(Goods, verbose_name="商品", on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='banner', verbose_name="轮播图片")
+    # image = models.ImageField(upload_to='banner', verbose_name="轮播图片")
+    image = StdImageField(max_length=100, upload_to='banner', verbose_name="轮播图片", variations={
+        'thumbnail': {'width': 100, 'height': 75}
+    })
+    url = models.CharField(max_length=100, verbose_name=u'访问地址')
     index = models.IntegerField(default=0, verbose_name="轮播顺序")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+
+    def url(self):
+        if self.image:
+            return  self.image.url
+        else:
+            return 'url为空'
+
+    def image_img(self):
+        if self.image:
+            # href = self.image.url #点击后显示的放大图片
+            # src = self.image.thumbnail.url #页面显示的缩略图
+            #插入html代码
+            image_html = str('<img src="%s" style="width: 120px; height: 50px;"/>' % self.image.url)
+            return image_html
+        else:
+            return '上传图片'
+
+    image_img.short_description = '轮播图片'
+    image_img.allow_tags = True #列表显示图片
 
     class Meta:
         verbose_name = '轮播商品'

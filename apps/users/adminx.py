@@ -19,6 +19,8 @@ class GlobalSettings(object):
 
 class VerifyCodeAdmin(object):
     list_display = ['code', 'mobile', "add_time"]
+    search_fields = ['mobile']
+    model_icon = 'fa fa-envelope'
 
 
 xadmin.site.register(VerifyCode, VerifyCodeAdmin)
