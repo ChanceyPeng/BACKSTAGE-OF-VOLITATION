@@ -13,6 +13,7 @@ class GoodsAdmin(object):
     list_filter = ["name", "click_num", "sold_num", "fav_num", "goods_num", "market_price",
                    "shop_price", "is_new", "is_hot", "add_time", "category__name"]
     style_fields = {"goods_desc": "ueditor"}
+    model_icon = 'fa fa-circle'
 
     class GoodsImagesInline(object):
         model = GoodsImage
@@ -27,10 +28,12 @@ class GoodsCategoryAdmin(object):
     list_display = ["name", "category_type", "parent_category", "add_time"]
     list_filter = ["category_type", "parent_category", "name"]
     search_fields = ['name', ]
+    model_icon = 'fa fa-th-list'
 
 
 class GoodsBrandAdmin(object):
     list_display = ["category", "image", "name", "desc"]
+    model_icon = 'fa fa-thumbs-up'
 
     def get_context(self):
         context = super(GoodsBrandAdmin, self).get_context()
@@ -41,14 +44,17 @@ class GoodsBrandAdmin(object):
 
 class BannerGoodsAdmin(object):
     list_display = ["goods", "image_img", "url", "index"]
+    model_icon = 'fa fa-exchange'
 
 
 class HotSearchAdmin(object):
     list_display = ["keywords", "index", "add_time"]
+    model_icon = 'fa fa-fire'
 
 
 class IndexAdAdmin(object):
     list_display = ["category", "goods"]
+    model_icon = 'fa fa-adn'
 
 
 xadmin.site.register(Goods, GoodsAdmin)

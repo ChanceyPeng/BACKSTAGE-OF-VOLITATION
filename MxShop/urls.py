@@ -85,8 +85,9 @@ urlpatterns = [
 
     url(r'^', include(router.urls)),
 
-    url(r'docs/', include_docs_urls(title="慕学生鲜")),
-# drf自带的token认证模式
+    url(r'docs/', include_docs_urls(title="千寻生鲜")),
+
+    # drf自带的token认证模式
     url(r'^api-token-auth/', views.obtain_auth_token),
 
 
