@@ -25,14 +25,14 @@ class GoodsAdmin(object):
 
 
 class GoodsCategoryAdmin(object):
-    list_display = ["name", "category_type", "parent_category", "add_time"]
+    list_display = ["name", "category_type", "category_logo", "parent_category", "add_time"]
     list_filter = ["category_type", "parent_category", "name"]
     search_fields = ['name', ]
     model_icon = 'fa fa-th-list'
 
 
 class GoodsBrandAdmin(object):
-    list_display = ["category", "image", "name", "desc"]
+    list_display = ["category", "image_img", "name", "desc"]
     model_icon = 'fa fa-thumbs-up'
 
     def get_context(self):

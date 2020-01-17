@@ -4,7 +4,7 @@ from django.db.models import Q
 
 
 class CategorySerializer3(serializers.ModelSerializer):
-    # sub_cat = CategorySerializer(many=True)
+    # sub_cat = CategorySerializerlizer(many=True)
 
     class Meta:
         model = GoodsCategory

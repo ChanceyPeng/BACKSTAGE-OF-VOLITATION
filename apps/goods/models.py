@@ -23,6 +23,7 @@ class GoodsCategory(models.Model):
     name = models.CharField(default="", max_length=30, verbose_name="类别名", help_text="类别名")
     code = models.CharField(default="", max_length=30, verbose_name="类别code", help_text="类别code")
     desc = models.TextField(default="", verbose_name="类别描述", help_text="类别描述")
+    category_logo = models.ImageField(upload_to="category_logo/",max_length=200, default="", null=True, blank=True, verbose_name="分类logo", help_text="分类logo")
     category_type = models.IntegerField(choices=CATEGORY_TYPE, verbose_name="类目级别", help_text="类目级别")
     parent_category = models.ForeignKey("self", null=True, blank=True, verbose_name="父类目级别", help_text="父目录",
                                         related_name="sub_cat", on_delete=models.CASCADE)
@@ -45,8 +46,30 @@ class GoodsCategoryBrand(models.Model):
                                  on_delete=models.CASCADE)
     name = models.CharField(default="", max_length=30, verbose_name="品牌名", help_text="品牌名")
     desc = models.TextField(default="", max_length=200, verbose_name="品牌描述", help_text="品牌描述")
-    image = models.ImageField(max_length=200, upload_to="brands/")
+    # image = models.ImageField(max_length=200, upload_to="brands/")
+    image = StdImageField(max_length=100, upload_to='brands/', verbose_name="品牌图片", variations={
+        'thumbnail': {'width': 100, 'height': 75}
+    })
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+
+    def url(self):
+        if self.image:
+            return  self.image.url
+        else:
+            return 'url为空'
+
+    def image_img(self):
+        if self.image:
+            # href = self.image.url #点击后显示的放大图片
+            # src = self.image.thumbnail.url #页面显示的缩略图
+            #插入html代码
+            image_html = str('<img src="%s" style="width: 120px; height: 50px;"/>' % self.image.url)
+            return image_html
+        else:
+            return '上传图片'
+
+    image_img.short_description = '轮播图片'
+    image_img.allow_tags = True #列表显示图片
 
     class Meta:
         verbose_name = "品牌"

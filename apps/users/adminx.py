@@ -12,8 +12,8 @@ class BaseSetting(object):
 
 
 class GlobalSettings(object):
-    site_title = "千寻生鲜后台"
-    site_footer = "mxshop"
+    site_title = "千寻生鲜后台管理系统"
+    site_footer = "2020 volitation.com All Rights Reserved"
     # menu_style = "accordion"
 
 

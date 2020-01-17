@@ -15,6 +15,7 @@ class UserLeavingMessageAdmin(object):
     model_icon = 'fa fa-comments'
 
 
+
 class UserAddressAdmin(object):
     list_display = ["signer_name", "signer_mobile", "district", "address"]
     model_icon = 'fa fa-location-arrow'
